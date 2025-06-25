@@ -46,9 +46,7 @@ Interactive-Resume-Builder/
 
 ## ⚙️ How to Use
 
-1. **Clone this repository or Download ZIP**.
-
-git clone https://github.com/your-username/interactive-resume-builder.git
+1. **Clone this repository or Download ZIP**.git clone https://github.com/your-username/interactive-resume-builder.git
 2. **Open index.html in your web browser**.
 3. **Fill in the form — the resume preview updates instantly**.
 4. **Click “Download as PDF” to generate and save your resume**.

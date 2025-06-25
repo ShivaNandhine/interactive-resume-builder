@@ -26,11 +26,12 @@ The **Interactive Resume Builder** is a dynamic web app that allows users to cre
 
 Interactive-Resume-Builder/
 │
-├── index.html # Main HTML structure
-├── style.css # All styles + animations + responsive layout
-├── script.js # Logic for form update, preview, PDF download
-├── resume-icon.png 
-└── README.md # Project documentation
+├── index.html            # Main HTML structure and form layout
+├── style.css             # All styles, animations, and responsive layout
+├── script.js             # JavaScript logic for preview, form updates, PDF generation
+├── resume-icon.png       # icon
+└── README.md             # Complete project documentation
+
 
 
 ---
@@ -38,13 +39,18 @@ Interactive-Resume-Builder/
 ## 🛠 Technologies Used
 
 - **HTML5**
-- **CSS3** (animations, media queries)
-- **JavaScript** (Vanilla)
+- **CSS3** 
+- **JavaScript** 
 - **[html2pdf.js](https://github.com/eKoopmans/html2pdf)** (PDF export)
 
 ---
 
 ## ⚙️ How to Use
 
-1. **Clone this repository** or [Download ZIP](#).
+1. **Clone this repository or Download ZIP**.
    git clone https://github.com/your-username/interactive-resume-builder.git
+2. **Open index.html in your web browser**.
+3. **Fill in the form — the resume preview updates instantly**.
+4. **Click “Download as PDF” to generate and save your resume**.
+
+

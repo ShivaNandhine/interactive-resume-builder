@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Resume Builder</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="resume-icon.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <header>
+        <h1>Interactive Resume Builder</h1>
+        <p>Build your resume and download it instantly!</p>
+    </header>
+
+    <main class="container">
+        <!-- Form Section -->
+        <section class="form-section">
+            <form id="resume-form">
+                <h2>Personal Information</h2>
+                <label>Name:<input type="text" id="name" placeholder="Enter your name" required /></label>
+                <label>Email:<input type="email" id="email" placeholder="Enter your email id" required /></label>
+                <label>Phone:<input type="tel" id="phone" placeholder="Enter your mobile number" required /></label>
+                <label>Location:<input type="text" id="location" placeholder="Enter your city" required /></label>
+                <label>LinkedIn:<input type="text" id="linkedin" placeholder="Enter your linkedin account link" /></label>
+                <label>GitHub:<input type="text" id="github" placeholder="Enter your github account link" /></label>
+
+                <label>Profile Summary:
+                    <textarea id="summary" rows="3" placeholder="Enter your profile summary here..."></textarea>
+                </label>
+
+                <h2>Education</h2>
+                <div id="education-fields">
+                    <div class="education-entry">
+                        <input type="text" placeholder="Institute Name" class="edu-institute" />
+                        <input type="text" placeholder="Degree" class="edu-degree" />
+                        <input type="text" placeholder="Duration" class="edu-duration" />
+                        <input type="text" placeholder="Percentage" class="edu-percent" />
+                    </div>
+                </div>
+                <button type="button" onclick="addEducation()">+ Add Education</button>
+
+                <h2>Experience</h2>
+                <div id="experience-fields">
+                    <div class="experience-entry">
+                        <input type="text" placeholder="Company Name" class="exp-company" />
+                        <input type="text" placeholder="Role" class="exp-role" />
+                        <input type="text" placeholder="Duration" class="exp-duration" />
+                    </div>
+                </div>
+                <button type="button" onclick="addExperience()">+ Add Experience</button>
+
+                <h2>Skills</h2>
+                <div class="skills-group" id="skills-container">
+                    <label><input type="checkbox" class="skill" value="HTML5" /> HTML5</label>
+                    <label><input type="checkbox" class="skill" value="CSS3" /> CSS3</label>
+                    <label><input type="checkbox" class="skill" value="JavaScript" /> JavaScript</label>
+                    <label><input type="checkbox" class="skill" value="Python" /> Python</label>
+                    <label><input type="checkbox" class="skill" value="Java" /> Java</label>
+                    <label><input type="checkbox" class="skill" value="C" /> C</label>
+                    <label><input type="checkbox" class="skill" value="SQL" /> SQL</label>
+                </div>
+                <div class="other-skill-input">
+                    <label>Other Skills:
+                        <input type="text" id="other-skill" placeholder="Type a skill and press Enter..." onkeydown="handleOtherSkill(event)" />
+                    </label>
+                </div>
+
+                <h2>Projects (Optional)</h2>
+                <div id="project-fields">
+                    <div class="project-entry">
+                        <input type="text" placeholder="Project Title" class="project-title" />
+                        <textarea rows="2" placeholder="Project Description" class="project-desc"></textarea>
+                    </div>
+                </div>
+                <button type="button" onclick="addProject()">+ Add Project</button>
+
+                <h2>Certifications (Optional)</h2>
+                <div id="certification-fields">
+                    <div id="certification-div"><ul id="certification-list"></ul></div>
+                    <input type="text" placeholder="Enter a certification and press Enter..." id="certification-input" onkeydown="handleCertInput(event)" />
+                </div>
+
+                <h2>Achievements (Optional)</h2>
+                <div id="achievement-fields">
+                    <div id="achievement-div"><ul id="achievement-list"></ul></div>
+                    <textarea rows="2" placeholder="Enter an achievement and press Enter..." id="achievement-input" onkeydown="handleAchieveInput(event)"></textarea>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="button" onclick="resetForm()">Clear</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Resume Preview Section -->
+        <section class="resume-section" id="resume-preview">
+            <div class="resume-box" id="resume-box">
+                <h2 id="preview-name" class="centered">Your Name</h2>
+                <p id="preview-contact" class="centered">
+                    <span id="preview-email">example@gmail.com</span> |
+                    <span id="preview-phone">+00 00000 00000</span> |
+                    <span id="preview-location">City</span>
+                </p>
+                <p class="centered">
+                    <span id="preview-linkedin">linkedin.com/in/your account</span> |
+                    <span id="preview-github">github.com/your account</span>
+                </p>
+
+                <h3 id="preview-summary-title">Profile Summary</h3>
+                <p id="preview-summary">A brief profile summary will appear here...</p>
+
+                <hr class="section-divider" />
+                <h3>Education</h3>
+                <ul id="preview-education"></ul>
+
+                <hr class="section-divider" />
+                <h3>Experience</h3>
+                <ul id="preview-experience"></ul>
+
+                <hr class="section-divider" />
+                <h3>Skills</h3>
+                <ul id="preview-skills"></ul>
+
+                <div id="optional-sections">
+                    <div id="preview-projects-section" style="display: none">
+                        <hr class="section-divider" />
+                        <h3>Projects</h3>
+                        <ul id="preview-projects"></ul>
+                    </div>
+                    <div id="preview-certifications-section" style="display: none">
+                        <hr class="section-divider" />
+                        <h3>Certifications</h3>
+                        <ul id="preview-certifications"></ul>
+                    </div>
+                    <div id="preview-achievements-section" style="display: none">
+                        <hr class="section-divider" />
+                        <h3>Achievements</h3>
+                        <ul id="preview-achievements"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="download-button">
+                <button onclick="downloadPDF()">Download as PDF</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Libraries -->
+    <script src="html2pdf.bundle.min.js"></script>
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>

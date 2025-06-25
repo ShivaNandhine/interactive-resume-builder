@@ -25,11 +25,16 @@ The **Interactive Resume Builder** is a dynamic web app that allows users to cre
 ## 📁 Project Structure
 
 Interactive-Resume-Builder/
-│
+
+
 ├── index.html            # Main HTML structure and form layout
+
 ├── style.css             # All styles, animations, and responsive layout
+
 ├── script.js             # JavaScript logic for preview, form updates, PDF generation
+
 ├── resume-icon.png       # icon
+
 └── README.md             # Complete project documentation
 
 

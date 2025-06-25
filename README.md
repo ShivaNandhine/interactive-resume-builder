@@ -40,7 +40,7 @@ Interactive-Resume-Builder/
 - **HTML5**
 - **CSS3** 
 - **JavaScript** 
-- **[html2pdf.js](https://github.com/eKoopmans/html2pdf)** (PDF export)
+- **html2pdf.js** (PDF export)
 
 ---
 

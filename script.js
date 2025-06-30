@@ -1,3 +1,76 @@
+// Add live validation listeners
+document.addEventListener("DOMContentLoaded", () => {
+  const requiredFields = ["name", "email", "phone", "location", "summary"];
+
+  requiredFields.forEach(id => {
+    const field = document.getElementById(id);
+    field.addEventListener("input", () => validateField(field));
+    field.addEventListener("blur", () => validateField(field));
+  });
+
+  document.getElementById("email").addEventListener("input", validateEmail);
+  document.getElementById("phone").addEventListener("input", validatePhone);
+
+  // Skills live validation
+  document.querySelectorAll(".skill").forEach(skill => {
+    skill.addEventListener("change", validateSkills);
+  });
+
+  // Education block validation
+  document.querySelectorAll(".edu-institute, .edu-degree, .edu-duration, .edu-percent").forEach(input => {
+    input.addEventListener("input", validateEducation);
+  });
+});
+
+// === Validation Functions ===
+function validateField(field) {
+  if (!field.value.trim()) {
+    field.classList.add("input-error");
+  } else {
+    field.classList.remove("input-error");
+  }
+}
+
+function validateEmail() {
+  const email = document.getElementById("email");
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (email.value.trim() && !regex.test(email.value.trim())) {
+    email.classList.add("input-error");
+  } else {
+    email.classList.remove("input-error");
+  }
+}
+
+function validatePhone() {
+  const phone = document.getElementById("phone");
+  const digits = phone.value.replace(/\D/g, "");
+  if (phone.value.trim() && digits.length <= 10) {
+    phone.classList.add("input-error");
+  } else {
+    phone.classList.remove("input-error");
+  }
+}
+
+function validateSkills() {
+  const skillsChecked = document.querySelectorAll(".skill:checked").length > 0;
+  const container = document.getElementById("skills-container");
+  if (!skillsChecked) {
+    container.classList.add("input-error");
+  } else {
+    container.classList.remove("input-error");
+  }
+}
+
+function validateEducation() {
+  const entry = document.querySelector(".education-entry");
+  const anyFilled = [...entry.querySelectorAll("input")].some(input => input.value.trim());
+  if (!anyFilled) {
+    entry.classList.add("input-error");
+  } else {
+    entry.classList.remove("input-error");
+  }
+}
+
 // === Auto-resizing Textareas ===
 document.querySelectorAll("textarea").forEach(textarea => {
   textarea.addEventListener("input", () => autoResizeTextarea(textarea));

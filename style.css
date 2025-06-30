@@ -179,6 +179,12 @@ input[type="checkbox"] {
 #achievement-list li{
   cursor: pointer;
 }
+
+.input-error {
+  border: 2px solid crimson !important;
+  background-color: #fff0f0;
+}
+
 /* === RESUME PREVIEW === */
 .resume-section h2,
 .resume-section h3 {
